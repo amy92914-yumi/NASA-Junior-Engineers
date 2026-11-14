@@ -8,8 +8,16 @@
     return '<svg viewBox="0 0 800 450" role="img" aria-label="' + title + '" xmlns="http://www.w3.org/2000/svg" font-family="inherit">' +
       '<rect width="800" height="450" rx="18" fill="' + BG + '"/>' + inner + '</svg>';
   }
+  /* 雙語文字：中文與英文各一個 tspan，依網頁語言只顯示一種（CSS：.lang-zh svg .en / .lang-en svg .zh 隱藏） */
+  function tb(x, y, zh, en, o) {
+    o = o || {};
+    return '<text x="' + x + '" y="' + y + '" fill="' + (o.c || TXT) + '" text-anchor="' + (o.a || 'middle') + '"' + (o.b ? ' font-weight="700"' : '') + '>' +
+      '<tspan class="zh" font-size="' + (o.zs || o.s || 20) + '">' + zh + '</tspan><tspan class="en" font-family="Arial, Helvetica, sans-serif" font-size="' + (o.es || o.s || 20) + '">' + en + '</tspan></text>';
+  }
   function t(x, y, s, o) {
     o = o || {};
+    var m = /^(.*[一-鿿].*?) · (.+)$/.exec(s);   /* 「中文 · English」自動拆成兩種語言 */
+    if (m) return tb(x, y, m[1], m[2], o);
     return '<text x="' + x + '" y="' + y + '" fill="' + (o.c || TXT) + '" font-size="' + (o.s || 20) + '" text-anchor="' + (o.a || 'middle') + '"' + (o.b ? ' font-weight="700"' : '') + '>' + s + '</text>';
   }
   /* 固定亂數，讓每次畫出的點一樣 */
@@ -33,15 +41,15 @@
   /* 1. 機智號：稀薄的空氣 */
   ILLS.ing_air = {
     zh: '示意圖：同一架直升機，在空氣濃的地球與空氣稀薄的火星（不按比例）', en: 'Illustration: the same helicopter in thick Earth air and thin Mars air (not to scale)',
-    svg: '<svg viewBox="0 0 520 660" role="img" aria-label="稀薄的空氣示意圖" xmlns="http://www.w3.org/2000/svg" font-family="inherit">' +
+    svg: '<svg viewBox="0 0 520 660" role="img" aria-label="稀薄的空氣示意圖 / Illustration: thin air" xmlns="http://www.w3.org/2000/svg" font-family="inherit">' +
       '<rect width="520" height="660" rx="18" fill="' + BG + '"/>' +
       '<rect x="20" y="18" width="480" height="250" rx="14" fill="#16335a"/><rect x="20" y="282" width="480" height="250" rx="14" fill="#4a2a22"/>' +
       dots(110, 30, 28, 460, 230, 7, '#9fd4ff', 2.6) + dots(12, 30, 292, 460, 230, 11, '#f2b08a', 2.6) +
       heli(260, 150, 52, '#ffffff') + heli(260, 414, 118, '#ffd9b3') +
       '<path d="M120 368 q-18 -10 0 -20 M400 368 q18 -10 0 -20" stroke="' + AMB + '" stroke-width="3" fill="none"/>' +
       t(260, 56, '地球 · Earth', { b: 1, s: 24 }) + t(260, 320, '火星 · Mars', { b: 1, s: 24 }) +
-      t(260, 244, '空氣粒子很多 · Lots of air', { s: 19 }) + t(260, 486, '旋翼要更大、轉得更快（約 2,400 rpm）', { c: AMB, s: 17 }) + t(260, 514, '空氣粒子很少 · Very little air', { s: 19 }) +
-      t(260, 582, '火星的空氣比地球稀薄約 99%', { b: 1, s: 22 }) + t(260, 612, 'Mars’s air is about 99% less dense than Earth’s', { c: MUT, s: 16 }) + '</svg>'
+      t(260, 244, '空氣粒子很多 · Lots of air', { s: 19 }) + tb(260, 486, '旋翼要更大、轉得更快（約 2,400 rpm）', 'Bigger rotors, spinning faster (~2,400 rpm)', { c: AMB, s: 17 }) + t(260, 514, '空氣粒子很少 · Very little air', { s: 19 }) +
+      tb(260, 590, '火星的空氣比地球稀薄約 99%', 'Mars\'s air is about 99% less dense than Earth\'s', { b: 1, zs: 22, es: 17 }) + '</svg>'
   };
 
   /* 2. 航海家1號：一光日 */
@@ -57,7 +65,7 @@
       t(400, 130, '一個指令 · One command', { c: AMB, s: 20 }) +
       '<rect x="60" y="300" width="680" height="30" rx="15" fill="#1d2a4f"/><rect x="60" y="300" width="680" height="30" rx="15" fill="' + CY + '" opacity=".35"/>' +
       t(400, 322, '單程約 23 小時 58 分 ≈ 1 光日 · One way ≈ 1 light-day', { s: 17 }) +
-      t(400, 380, '你傳出指令，要等一天才會到，再等一天才聽得到回覆', { b: 1, s: 20 }) + t(400, 408, 'A command takes a day to arrive; the reply takes another day to return', { c: MUT, s: 16 }), '訊號傳到航海家1號的示意圖')
+      tb(400, 390, '你傳出指令，要等一天才會到，再等一天才聽得到回覆', 'A command takes a day to arrive; the reply takes another day to return', { b: 1, zs: 20, es: 18 }), '訊號傳到航海家1號的示意圖 / Illustration: signal travel to Voyager 1')
   };
 
   /* 3. 火星氣候軌道器：九個多月的航程 */
@@ -69,10 +77,10 @@
       '<path d="M400 65 C 650 70, 630 330, 400 428" fill="none" stroke="' + CY + '" stroke-width="4" stroke-dasharray="8 8"/>' +
       '<circle cx="400" cy="65" r="14" fill="#2b6fd6"/><circle cx="400" cy="430" r="18" fill="#c8552d"/>' +
       '<circle cx="648" cy="205" r="9" fill="' + AMB + '"/><path d="M634 205 l-14 -8 l0 16z" fill="' + AMB + '"/>' +
-      t(400, 38, '1998/12/11 發射 · Launch', { b: 1, s: 20 }) + t(400, 446, '約九個多月後抵達火星 · Arrival ~9 months later', { b: 1, s: 20 }) +
-      t(690, 238, '航行約 9 個多月', { c: AMB, s: 17 }) + t(690, 260, '≈ 9+ months in flight', { c: AMB, s: 15 }) +
-      t(400, 262, '太陽 · Sun', { s: 16, c: '#1a1200' }) +
-      t(130, 215, '地球軌道 · Earth’s orbit', { c: MUT, s: 15, a: 'start' }) + t(130, 238, '火星軌道 · Mars’s orbit', { c: MUT, s: 15, a: 'start' }), '氣候軌道器的航程示意圖')
+      tb(400, 38, '1998/12/11 發射', 'Launch: 1998/12/11', { b: 1, s: 20 }) + tb(432, 438, '約九個多月後抵達火星', 'Arrival at Mars ~9 months later', { b: 1, s: 20, a: 'start' }) +
+      tb(690, 244, '航行約 9 個多月', '≈ 9+ months in flight', { c: AMB, s: 17 }) +
+      tb(400, 221, '太陽', 'Sun', { s: 15, b: 1, c: '#1a1200' }) +
+      t(130, 215, '地球軌道 · Earth\'s orbit', { c: MUT, s: 15, a: 'start' }) + t(130, 238, '火星軌道 · Mars\'s orbit', { c: MUT, s: 15, a: 'start' }), '氣候軌道器的航程示意圖 / Illustration: Climate Orbiter trip')
   };
 
   /* 4. 火星氣候軌道器：飛得太低 */
@@ -85,11 +93,11 @@
       '<line x1="60" y1="320" x2="740" y2="320" stroke="' + RED + '" stroke-width="3" stroke-dasharray="10 8"/>' +
       '<path d="M40 40 C 200 70, 330 160, 400 318 C 470 330, 600 300, 760 250" fill="none" stroke="' + CY + '" stroke-width="4"/>' +
       '<circle cx="400" cy="318" r="9" fill="' + RED + '"/>' +
-      t(740, 56, '預定高度約 140–150 公里', { c: GRN, a: 'end', s: 18 }) + t(740, 78, 'Planned ~140–150 km', { c: GRN, a: 'end', s: 15 }) +
-      t(740, 180, '能存活的最低高度 80 公里', { c: AMB, a: 'end', s: 18 }) + t(740, 202, 'Minimum survivable 80 km', { c: AMB, a: 'end', s: 15 }) +
-      t(740, 346, '實際只有約 57 公里', { c: RED, a: 'end', s: 18, b: 1 }) + t(740, 366, 'Actual ~57 km', { c: RED, a: 'end', s: 15 }) +
-      t(230, 250, '訊號比預測早 49 秒消失', { s: 17 }) + t(230, 272, 'Signal lost 49 s early', { s: 15, c: MUT }) +
-      t(400, 415, '火星表面 · Mars surface', { s: 16, c: '#fff' }), '氣候軌道器飛得太低的示意圖')
+      tb(740, 62, '預定高度約 140–150 公里', 'Planned altitude ~140–150 km', { c: GRN, a: 'end', s: 18 }) +
+      tb(740, 186, '能存活的最低高度 80 公里', 'Minimum survivable altitude 80 km', { c: AMB, a: 'end', s: 18 }) +
+      tb(740, 352, '實際只有約 57 公里', 'Actual altitude only ~57 km', { c: RED, a: 'end', s: 18, b: 1 }) +
+      tb(230, 256, '訊號比預測早 49 秒消失', 'Signal lost 49 s early', { s: 17 }) +
+      t(400, 415, '火星表面 · Mars surface', { s: 16, c: '#fff' }), '氣候軌道器飛得太低的示意圖 / Illustration: Climate Orbiter altitude')
   };
 
   /* 5. 火星氣候軌道器：單位搞錯 */
@@ -98,15 +106,15 @@
     svg: svg(
       '<rect x="40" y="70" width="270" height="170" rx="16" fill="#1d2a4f" stroke="' + CY + '" stroke-width="2"/>' +
       '<rect x="490" y="70" width="270" height="170" rx="16" fill="#1d2a4f" stroke="' + AMB + '" stroke-width="2"/>' +
-      t(175, 108, '地面軟體', { b: 1, s: 21 }) + t(175, 132, 'Ground software', { c: MUT, s: 15 }) +
-      t(175, 190, '輸出：磅力·秒', { c: CY, s: 24, b: 1 }) + t(175, 218, 'Output: lbf·s', { c: CY, s: 17 }) +
-      t(625, 108, '導航軟體', { b: 1, s: 21 }) + t(625, 132, 'Navigation software', { c: MUT, s: 15 }) +
-      t(625, 190, '以為是：牛頓·秒', { c: AMB, s: 24, b: 1 }) + t(625, 218, 'Assumed: N·s', { c: AMB, s: 17 }) +
+      tb(175, 116, '地面軟體', 'Ground software', { b: 1, s: 21 }) +
+      tb(175, 200, '輸出：磅力·秒', 'Output: lbf·s', { c: CY, zs: 24, es: 24, b: 1 }) +
+      tb(625, 116, '導航軟體', 'Navigation software', { b: 1, s: 21 }) +
+      tb(625, 200, '以為是：牛頓·秒', 'Assumed: N·s', { c: AMB, zs: 24, es: 24, b: 1 }) +
       '<path d="M320 155 L480 155" stroke="' + TXT + '" stroke-width="4"/><path d="M468 142 l16 13 l-16 13" fill="none" stroke="' + TXT + '" stroke-width="4"/>' +
-      t(400, 140, '交接檔案', { s: 16 }) + t(400, 188, 'hand-off', { s: 14, c: MUT }) +
+      tb(400, 140, '交接檔案', 'hand-off', { s: 16 }) +
       '<rect x="150" y="285" width="500" height="92" rx="16" fill="#3a1f26" stroke="' + RED + '" stroke-width="2"/>' +
-      t(400, 322, '1 磅力 ≈ 4.45 牛頓 → 每次都少算', { b: 1, s: 21, c: '#ffd3d3' }) + t(400, 352, '1 lbf ≈ 4.45 N → every value was too small', { s: 16, c: '#ffd3d3' }) +
-      t(400, 420, '小錯誤在九個多月的航程裡不斷累積 · Small error, months of drift', { c: MUT, s: 16 }), '單位搞錯的示意圖')
+      tb(400, 337, '1 磅力 ≈ 4.45 牛頓 → 每次都少算', '1 lbf ≈ 4.45 N → every value was too small', { b: 1, zs: 21, es: 19, c: '#ffd3d3' }) +
+      t(400, 420, '小錯誤在九個多月的航程裡不斷累積 · Small error, months of drift', { c: MUT, s: 16 }), '單位搞錯的示意圖 / Illustration: unit mix-up')
   };
 
   window.ILLS = ILLS;

@@ -508,7 +508,7 @@
   /* ---------- 渲染與翻頁 ---------- */
   var book = document.getElementById('book'), spread = null, cur = null, flipping = false, token = 0, theme = null, gesture = false;
   function setSize() {
-    var H = innerHeight - 46 - 14, bw = Math.min(innerWidth / 1.24, H * RATIO); bw = Math.max(bw, 560);
+    var H = innerHeight - 46 - 14, bw = Math.min(innerWidth / 1.24, H * RATIO); bw = Math.max(bw, 560); bw = Math.max(Math.min(bw, innerWidth - 2 * 104 - 8), 360);   /* 書籤掛在書右側，至少留出書籤寬度（104px）；窄螢幕時縮小書本 */
     book.style.setProperty('--bw', bw + 'px'); book.style.setProperty('--bh', (bw / RATIO) + 'px');
   }
   var RATIO = 1.7;
@@ -591,9 +591,14 @@
     document.body.className = 'lang-' + store.lang; document.documentElement.lang = store.lang === 'en' ? 'en' : 'zh-Hant';
     var seg = document.getElementById('langSeg'); seg.innerHTML = '';
     [['zh', '中文'], ['en', 'English']].forEach(function (p) { seg.appendChild(h('button', { 'aria-pressed': String(store.lang === p[0]), onclick: function () { store.lang = p[0]; save(); applyLang(); } }, [p[1]])); });
+    var en = store.lang === 'en', sub = document.querySelector('.brand-text small'), fs = document.getElementById('fsBtn'), ft = document.getElementById('footer');
+    if (sub) sub.textContent = en ? 'Lost Explorers · NASA' : '遺落的探險家 · NASA';
+    if (fs) fs.textContent = en ? '⛶ Fullscreen' : '⛶ 全螢幕';
+    if (ft) ft.textContent = en ? 'Images: NASA Image and Video Library · Not affiliated with NASA' : '圖片：NASA Image and Video Library · 非 NASA 官方作品';
+    if (typeof syncSnd === 'function' && window.SFX) syncSnd();
   }
   var snd = document.getElementById('sndBtn');
-  function syncSnd() { var m = SFX.isMuted(); snd.textContent = m ? '🔇 全靜音' : '🔊 聲音開'; snd.setAttribute('aria-pressed', String(m)); snd.setAttribute('aria-label', m ? '目前全靜音，點一下開啟聲音 Muted, click to unmute' : '目前有聲音，點一下全靜音 Sound on, click to mute all'); snd.title = m ? '開啟聲音' : '全靜音（音效與背景音樂都關掉）'; }
+  function syncSnd() { var m = SFX.isMuted(); var en = store.lang === 'en'; snd.textContent = m ? (en ? '🔇 Muted' : '🔇 全靜音') : (en ? '🔊 Sound on' : '🔊 聲音開'); snd.setAttribute('aria-pressed', String(m)); snd.setAttribute('aria-label', m ? '目前全靜音，點一下開啟聲音 Muted, click to unmute' : '目前有聲音，點一下全靜音 Sound on, click to mute all'); snd.title = en ? (m ? 'Turn sound on' : 'Mute all (effects and music)') : (m ? '開啟聲音' : '全靜音（音效與背景音樂都關掉）'); }
   snd.addEventListener('click', function () { SFX.setMuted(!SFX.isMuted()); syncSnd(); if (!SFX.isMuted()) { gesture = true; SFX.unlock(); BGM.play(theme || 'home'); } });
   document.addEventListener('keydown', function (e) {
     if (/INPUT|TEXTAREA|SELECT/.test((e.target || {}).tagName || '')) return;
@@ -608,6 +613,5 @@
   function toggleFull() { try { if (isFull()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); } else enterFull(); } catch (e) {} }
   var fsb = document.getElementById('fsBtn'); if (fsb) fsb.addEventListener('click', toggleFull);
   document.addEventListener('fullscreenchange', function () { document.body.classList.toggle('isfull', isFull()); });
-  document.getElementById('footer').textContent = 'Images: NASA Image and Video Library · Not affiliated with NASA · 非 NASA 官方作品';
   applyLang(); syncSnd(); render();
 })();

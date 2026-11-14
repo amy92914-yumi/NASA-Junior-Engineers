@@ -221,3 +221,6 @@ input[type=range]{width:100%;accent-color:var(--accent)}
    radial-gradient(1px 1px at 7% 63%,#fff,transparent),radial-gradient(1px 1px at 45% 8%,#fff,transparent),
    radial-gradient(ellipse at 25% 15%,#1f3470 0%,transparent 55%),#050912;
   box-shadow:0 10px 30px rgba(0,0,0,.45)}
+
+/* 示意圖（SVG）內的雙語文字：依語言只顯示一種 */
+.lang-zh svg .en,.lang-en svg .zh{display:none}

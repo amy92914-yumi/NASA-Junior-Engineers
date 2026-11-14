@@ -119,7 +119,7 @@ body{background:#02030a;min-height:0}
 .footnote{position:fixed;left:0;right:0;bottom:2px;text-align:center;font-size:10.5px;color:#6f7ba3;z-index:6;pointer-events:none}
 .formbox{background:var(--card2);border:1px dashed var(--accent);border-radius:12px;padding:.7em 1em}
 
-@media (max-width:760px){ .marks{display:none} }
+/* 書籤：直放時由「請橫放」提示蓋住畫面，所以不再隱藏；橫放的窄螢幕也要顯示 */
 
 .pgc.img,.pgc.full{height:100%}
 #book{font-size:calc(var(--bw,1100px)/82)}
@@ -156,8 +156,8 @@ body{background:#02030a;min-height:0}
 .note{font-size:.95em}
 
 /* 書籤：放大 */
-.marks{right:calc(var(--bw)*-.105);top:calc(var(--bh)*.05);gap:calc(var(--bh)*.012)}
-.mark{width:calc(var(--bw)*.105);min-width:104px;font-size:.95em;padding:.6em .4em .6em .65em;line-height:1.25}
+.marks{--mw:max(calc(var(--bw)*.105),104px);right:calc(var(--mw)*-1);top:calc(var(--bh)*.05);gap:calc(var(--bh)*.012)}
+.mark{width:var(--mw);font-size:max(.95em,11px);padding:.6em .4em .6em .65em;line-height:1.25}
 
 /* 折角：縮小 */
 .fold{width:calc(var(--bw)*.03);height:calc(var(--bw)*.03)}
@@ -417,3 +417,20 @@ a.rd-row:hover{border-color:#ffd166}
    radial-gradient(1px 1px at 52% 16%,#fff,transparent),radial-gradient(1.2px 1.2px at 91% 38%,#cfe0ff,transparent),
    radial-gradient(1px 1px at 7% 30%,#fff,transparent),radial-gradient(1px 1px at 45% 6%,#fff,transparent),
    linear-gradient(180deg,#02030a 0%,#06070e 58%,#8c8c92 58.4%,#4a4a50 100%)}
+
+/* ===== 手機橫放（矮螢幕）：書籤只留一行，避免超出書本高度 ===== */
+@media (max-height:500px){
+  .mark .en{display:none}
+  .lang-en .mark .zh{display:none}
+  .lang-en .mark .en{display:block}
+}
+
+/* ===== 手機直放：請橫放手機 ===== */
+@media (max-width:760px) and (orientation:portrait){
+  body::before{content:"\1F4F1";position:fixed;left:0;right:0;top:calc(50% - 5.2em);text-align:center;font-size:4.2em;z-index:10001;animation:rotHint 2.4s ease-in-out infinite;pointer-events:none}
+  body::after{content:"請將手機橫放，閱讀效果最好\A Please rotate your phone to landscape";white-space:pre-line;position:fixed;inset:0;padding:calc(50% + 2em) 1.5em 0;box-sizing:border-box;text-align:center;font-size:1.15em;line-height:1.8;font-weight:700;color:#f4d58d;background:radial-gradient(circle at 50% 40%,#16224a,#05070f);z-index:10000}
+}
+@keyframes rotHint{0%,20%{transform:rotate(0)}50%,70%{transform:rotate(-90deg)}100%{transform:rotate(0)}}
+
+/* 示意圖（SVG）內的雙語文字：依語言只顯示一種 */
+.lang-zh svg .en,.lang-en svg .zh{display:none}
