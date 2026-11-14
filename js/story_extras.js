@@ -92,6 +92,23 @@
                  '[Before departure] One record and one small flag. They board Voyager together as “mementos of Earth”.') }
       ],
       banners: { challenge: 'PIA17035', science: 'PIA14113' }
+    },
+    kepler: {
+      story: [
+        { log: B('【2009/3/6 夜裡・卡納維爾角】倒數歸零，火箭點火。控制室裡的人盯著螢幕，心裡想的是同一件事：望遠鏡要先平安進入軌道，才輪得到找行星。',
+                 '[Night of Mar 6, 2009 · Cape Canaveral] The countdown hits zero and the rocket ignites. In the control room everyone watches the screens with the same thought: the telescope must reach its orbit safely before it can hunt for planets.') },
+        { img: 'kep_transit', log: B('【分析員的筆記本】「別被一個點騙了。真正的行星，會一次又一次，在差不多的時間，讓星光暗下去一點點。」',
+                 '[An analyst’s notebook] “Do not be fooled by a single point. A real planet dims the starlight a little, again and again, at about the same interval.”') },
+        { log: B('【資料中心】一顆星，一條曲線。大部分的線平平的，什麼也沒有；但每找到一條規律出現凹陷的，就多了一個可能的新世界。',
+                 '[The data center] One star, one curve. Most lines are flat and show nothing, but every curve with a regular dip is one more possible new world.') },
+        { img: 'kep_sunlight', log: B('【2013/5・控制室】螢幕上的警示跳出來：又一顆反作用輪失去作用。工程師們互相看了一眼，望遠鏡再也停不住了。',
+                 '[May 2013 · Control room] An alert flashes on the screen: another reaction wheel has failed. The engineers look at one another: the telescope can no longer hold still.') },
+        { log: B('【工程師的白板】「陽光在推我們。那就讓它幫我們。」團隊把一個麻煩，寫成了新計畫的起點。',
+                 '[The engineers’ whiteboard] “Sunlight is pushing us. Then let it help.” The team turned a problem into the starting point of a new plan.') },
+        { log: B('【2018/10・最後的日子】燃料所剩無幾。團隊把最後的資料傳回地球，讓 Kepler 留在安靜的軌道上。望遠鏡停了，但它找到的行星還在等人去研究。',
+                 '[October 2018 · The last days] The fuel is nearly gone. The team sends the last data to Earth and leaves Kepler in a quiet orbit. The telescope has stopped, but the planets it found are still waiting to be studied.') }
+      ],
+      banners: { hardware: 'KSC-2009-1430', challenge: 'KSC-2009-1043', science: 'PIA11984' }
     }
   };
 

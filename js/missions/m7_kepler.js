@@ -12,9 +12,15 @@
   im('PIA18904', '藝術示意圖：以 K2 新模式運作的 Kepler。2013 年失去精準對準的能力後，一個巧妙的修正讓它有了第二次生命', 'Artist concept of Kepler in its K2 mission profile: after it lost precise pointing in 2013, a clever fix gave it a second life', 'NASA, ESA, CSA, and STScI', SCI);
   im('PIA11824', '藝術示意圖：在太空中的 NASA Kepler 太空船', 'Artist concept of NASA’s Kepler spacecraft in space', 'NASA', SCI);
   im('ACD18-0204-002', '示意圖：Kepler 在滿是系外行星的天空裡（九年任務後，因燃料用完而退役）', 'Illustration: Kepler in a sky full of exoplanets (retired after nine years when its fuel ran out)', 'NASA/Ames Research Center/W. Stenzel/D. Rutter', SCI);
-  im('ARC-2006-ACD06-0131-013', '2006 年攝影棚裡的 Kepler 桌上型模型（NASA 說明：預定 2009 年 3 月發射的 Kepler 任務，將尋找繞著遙遠恆星運行的類地行星）', 'A Kepler table-top model in a studio, 2006 (NASA caption: the Kepler Mission, due for launch in March 2009, will look for Earth-like planets around distant stars)', 'NASA Ames Research Center', SCI);
   im('ARC-2008-ACD07-0203-195', 'Ball Aerospace 的技術人員在 NASA 艾姆斯研究中心的測試艙裡，測試 Kepler 的元件', 'Technicians from Ball Aerospace test Kepler components in a test chamber at NASA’s Ames Research Center', 'NASA Ames Research Center', SCI);
-  im('200908060005HQ', '2009 年 8 月 6 日的 NASA 總部記者會：Kepler 計畫主持人 William Borucki（左二）說明 Kepler 發射後的科學觀測', 'NASA Headquarters press conference, August 6, 2009: Kepler principal investigator William Borucki (second from left) describes the science observations since launch', 'NASA/Paul E. Alers', SCI);
+  im('KSC-2009-1973', '2009 年 3 月 6 日晚上 10:49（美國東部時間），載著 Kepler 的 Delta II 火箭在卡納維爾角 17-B 發射台點火升空', 'The Delta II rocket carrying Kepler ignites at Launch Pad 17-B, Cape Canaveral, at 10:49 p.m. EST on March 6, 2009', 'NASA/KSC', 'NASA Image and Video Library');
+  im('PIA11984', 'Kepler 的完整視野：天鵝座與天琴座一帶約 100 平方度的星空，相當於兩個並排的北斗七星', 'Kepler’s full field of view: a star-rich patch of Cygnus and Lyra, 100 square degrees, about two side-by-side dips of the Big Dipper', 'NASA/Ames/JPL-Caltech', 'NASA Image and Video Library');
+  im('PIA11733', '2008 年在科羅拉多州波德 Ball Aerospace 公司的 Kepler 太空船：包著金色隔熱材料的圓筒就是望遠鏡', 'The Kepler spacecraft at Ball Aerospace in Boulder, Colorado, 2008: the foil-wrapped tube is the telescope', 'NASA/JPL-Caltech/Ball', 'NASA Image and Video Library');
+  im('KSC-2009-1124', '2009 年 1 月，佛羅里達州 Astrotech 設施：太陽能板的照光測試，燈光映在 Kepler 的太陽能板上', 'January 2009 at the Astrotech facility in Florida: illumination testing of Kepler’s solar array panels', 'NASA/KSC', 'NASA Image and Video Library');
+  im('KSC-2009-1041', '2009 年 1 月，Ball Aerospace 的工作人員在測試前檢查 Kepler 的星追蹤器（確保太空船準確導航的小型光學儀器）', 'January 2009: Ball Aerospace workers check Kepler’s star trackers, small optical devices that assure accurate navigation', 'NASA/KSC', 'NASA Image and Video Library');
+  im('KSC-2009-1480', '2009 年 2 月：Kepler 在 Astrotech 的危險品處理設施裡被放到台架上，準備加注燃料', 'February 2009: Kepler is lowered onto a stand for fueling in the Hazardous Processing Facility at Astrotech', 'NASA/KSC', 'NASA Image and Video Library');
+  im('KSC-2009-1430', '2009 年 1 月 30 日的媒體參訪：上方是太陽能板，左下角可以看到高增益天線', 'The January 30, 2009 media event: the solar arrays are on top and the high-gain antenna is at lower left', 'NASA/KSC', 'NASA Image and Video Library');
+  im('KSC-2009-1043', '2009 年 1 月：Kepler 在 Astrotech 的無塵室裡準備測試', 'January 2009: Kepler is prepared for testing in a clean room at Astrotech', 'NASA/KSC', 'NASA Image and Video Library');
 
   window.MISSIONS.push({
     id: 'kepler', icon: '🔭', color: '#4abe7d',
@@ -22,13 +28,13 @@
     tagline: B('一個盯著星星看的望遠鏡，壞了一顆輪子後，靠陽光找到第二次生命', 'A telescope that stared at stars, and found a second life with the help of sunlight after losing a wheel'),
     cover: 'PIA11824',
     story: [
-      { title: B('第一個專門找行星的望遠鏡', 'The first telescope built to hunt planets'), img: 'ARC-2006-ACD06-0131-013',
+      { title: B('第一個專門找行星的望遠鏡', 'The first telescope built to hunt planets'), img: 'KSC-2009-1973',
         text: B('2009 年 3 月，NASA 的 Kepler 太空望遠鏡從佛羅里達的卡納維爾角發射升空（美國東部時間 3 月 6 日；世界時是 3 月 7 日）。它是 NASA 第一個專門找行星的任務：要在銀河系的一小塊天區裡，尋找繞著其他恆星運行、和地球差不多大的行星。計畫的第一位主持人 William Borucki 說：當他們開始構想這個任務時，人類還不知道太陽系外有任何一顆行星。',
                 'In March 2009 NASA’s Kepler space telescope lifted off from Cape Canaveral, Florida (March 6 in US Eastern time; March 7 in universal time). It was NASA’s first planet-hunting mission, sent to search one patch of the Milky Way for Earth-sized planets orbiting other stars. Its founding principal investigator, William Borucki, said that when the team first imagined the mission, we did not know of a single planet outside our solar system.') },
       { title: B('用「變暗」找行星', 'Finding planets by the dip'), img: 'kep_transit',
         text: B('從這麼遠的地方，行星又小又暗，很難直接拍到。Kepler 用的是另一個方法：一直盯著恆星的亮度。當行星剛好從恆星前面經過，星光會暗下去一點點，這叫「凌日」。看到一次又一次、規律出現的小凹陷，就有可能是行星在繞著這顆星轉。',
                 'From so far away a planet is small and faint, and very hard to photograph directly. Kepler used another method: it watched a star’s brightness all the time. When a planet happens to cross in front of its star, the starlight dips by a tiny amount. This is called a transit. Small dips that come again and again on a regular schedule can mean a planet is circling that star.') },
-      { title: B('盯著十幾萬顆星星', 'Staring at a hundred thousand stars'), img: '200908060005HQ',
+      { title: B('盯著十幾萬顆星星', 'Staring at a hundred thousand stars'), img: 'PIA11984',
         text: B('Kepler 一直盯著天鵝座附近同一片星空，約 150,000 顆星星，持續記錄每一顆的亮度。它的相機是當時太空望遠鏡裡最大的數位相機。上線頭六週，它就找到 5 顆行星（Kepler-4b、5b、6b、7b、8b，2010 年 1 月公布）。2010 年 4 月公布的 Kepler-9，是第一個確認有不只一顆行星從同一顆星前面經過的系統；2011 年 2 月公布的 Kepler-11，離地球約 2,000 光年，有 6 顆行星。',
                 'Kepler stared at one patch of sky near the constellation Cygnus, about 150,000 stars, recording each one’s brightness all the time. Its camera was the largest digital camera on a space observatory at the time. In its first six weeks it found five planets (Kepler-4b, 5b, 6b, 7b and 8b, announced in January 2010). Kepler-9, announced in April 2010, was the first confirmed system with more than one planet transiting the same star; Kepler-11, announced in February 2011, lies about 2,000 light-years away and has six planets.') },
       { title: B('第二顆輪子壞了', 'The second wheel fails'), img: 'kep_sunlight',
@@ -152,6 +158,7 @@
       { label: 'NSSDCA Sun Fact Sheet', url: 'https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html', note: B('太陽平均半徑 695,700 公里', 'Sun mean radius 695,700 km') },
       { label: 'NSSDCA Earth Fact Sheet', url: 'https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html', note: B('地球平均半徑 6,371 公里', 'Earth mean radius 6,371 km') },
       { label: 'NSSDCA Jupiter Fact Sheet', url: 'https://nssdc.gsfc.nasa.gov/planetary/factsheet/jupiterfact.html', note: B('木星平均半徑 69,911 公里', 'Jupiter mean radius 69,911 km') },
+      { label: 'NASA Image and Video Library', url: 'https://images.nasa.gov/', note: B('Kepler 的發射、地面測試與視野照片（KSC、JPL、艾姆斯研究中心）', 'Photographs of Kepler’s launch, ground testing and field of view (KSC, JPL, Ames)') },
       { label: 'NASA 3D Resources: Kepler (A)', url: 'https://science.nasa.gov/3d-resources/kepler-a/', note: B('3D 模型來源（NASA/Kepler Mission）', 'Source of the 3D model (NASA/Kepler Mission)') }
     ]
   });
