@@ -73,7 +73,7 @@
   /* 沒有照片時：用程式畫的虛擬人物插畫 */
   function sceneFig(kind, role, ctx, zh, en) {
     var svg = window.AV.scene(kind, role, ctx);
-    var cap = h('figcaption', {}, [bi(B(zh, en)), h('span', { class: 'cr' }, [T('虛擬角色插畫，不是真實人物或實景照片', 'Illustrated fictional characters; not real people or photos')])]);
+    var cap = h('figcaption', {}, [bi(B(zh, en)), h('span', { class: 'cr' }, [T('虛擬角色插畫（角色插畫為 AI 生成），不是真實人物或實景照片', 'Fictional character illustrations (AI-generated); not real people or photos')])]);
     return h('figure', { class: 'fig' }, [h('div', { class: 'fmedia scene' }, [svgBox(svg)]), cap]);
   }
   var SCENE_CAP = {
@@ -104,7 +104,7 @@
     var blank = function (n) {
       var who = allRoles[(role.level - 1 + (n || 0)) % allRoles.length];
       return page([h('figure', { class: 'fig charfig' }, [h('div', { class: 'charimg' }, [svgBox(window.AV.portrait(who, 'body'))]),
-        h('figcaption', {}, [bi(who.name, 'inline'), ' · ', bi(who.job, 'inline'), h('span', { class: 'cr' }, [T('虛擬角色：名字與長相都是虛構的', 'A fictional character: name and looks are invented')])])])], 'img');
+        h('figcaption', {}, [bi(who.name, 'inline'), ' · ', bi(who.job, 'inline'), h('span', { class: 'cr' }, [T('虛擬角色：名字與長相都是虛構的。角色插畫為 AI 生成', 'A fictional character: name and looks are invented. Character illustrations are AI-generated')])])])], 'img');
     };
     S.push({ kind: 'story', title: 'open', build: function () {
       return { l: page([h('div', { class: 'kicker' }, [Ti('任務 ' + (M.indexOf(m) + 1), 'Mission ' + (M.indexOf(m) + 1))]), h('h2', {}, [m.icon + ' ', bi(m.title)]), h('p', { class: 'tagline' }, [bi(m.tagline)]),
@@ -457,7 +457,7 @@
       detail.innerHTML = '';
       if (!r) { detail.appendChild(h('div', { class: 'rolefull' }, [h('div', { class: 'rf-portrait' }, [sceneFig('crew', null, rs, m.title.zh + '的四位人物（虛擬插畫）', 'Four people of this mission (illustrated)')]),
         h('p', { class: 'note bigtip' }, [T('👈 點左邊的人物，這裡會整頁展示 TA 的特色。', '👈 Tap a person on the left to see their profile here.')])])); return; }
-      var cap = h('div', { class: 'rf-cap note' }, [T('虛擬人物：劇中角色，名字與長相都是虛構的', 'A fictional character: name and looks are invented')]);
+      var cap = h('div', { class: 'rf-cap note' }, [T('虛擬人物：劇中角色，名字與長相都是虛構的。角色插畫為 AI 生成', 'A fictional character: name and looks are invented. Character illustrations are AI-generated')]);
       var pic = h('div', { class: 'fmedia scene' }, [svgBox(window.AV.portrait(r))]);
       detail.appendChild(h('div', { class: 'rolefull', style: '--mc:' + m.color }, [
         h('div', { class: 'rf-portrait' }, [pic, cap]),
