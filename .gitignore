@@ -1,0 +1,8 @@
+.DS_Store
+Thumbs.db
+.playwright-mcp/
+
+# 備份與暫存
+_bak/
+*.bak*
+_tmp_explore/
