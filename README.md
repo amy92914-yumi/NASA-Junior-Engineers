@@ -59,6 +59,10 @@ To add or edit content, change only `js/missions/*.js`; text is stored as `B('�
 Images are from the [NASA Image and Video Library](https://images.nasa.gov/) (NASA/JPL-Caltech and others, credited in each caption with the NASA ID).
 The Wright brothers photograph is from the Library of Congress. See NASA's media usage guidelines: https://www.nasa.gov/nasa-brand-center/images-and-media/
 
+## Characters 角色插畫
+The character illustrations are AI-generated, supplied by the project author. They are fictional (names and faces are invented, not real people); this project only recolors the jacket for each mission.
+角色插畫為 AI 生成，由作者提供，皆為虛構人物（名字與長相都是虛構的）；本專案只依任務更換外套顏色。
+
 ## License 授權
 
 Code: MIT (see LICENSE). Content text: CC BY 4.0. NASA images remain subject to their original credits and NASA's media guidelines.

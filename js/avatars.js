@@ -1,4 +1,4 @@
-/* 虛擬人物插畫：用程式畫的卡通人物（非真人肖像、非 AI 生成、無版權問題）。
+/* 虛擬人物插畫：作者提供的 AI 生成角色圖（虛構人物，非真人肖像），再由程式依任務換外套顏色。
    沒有照片的頁面，就用這些「示意人物」補上。
    window.AV.portrait(role)        → 角色半身像 SVG 字串
    window.AV.scene(kind, role, m)   → 場景 SVG 字串（console / team / lab / party / crew）
@@ -11,7 +11,7 @@
   var STYLES = ['short', 'long', 'bun', 'curly', 'short', 'bald'];
   var ACCS = ['headset', 'glasses', 'cap', 'none', 'glasses', 'headset'];
 
-  /* ===== 11/13 改用幼鎂提供的角色圖（assets/img/chars/cXXX_<任務>.png，外套顏色依任務換色）===== */
+  /* ===== 11/13 改用作者提供的角色圖（assets/img/chars/cXXX_<任務>.png，外套顏色依任務換色）===== */
   var CHARS = {   /* 每個任務 4 位角色（由低到高難度）用哪張圖 */
     ingenuity: ['909', '910', '911', '916'],
     opportunity: ['910', '911', '914', '913'],
