@@ -18,7 +18,8 @@
     voyager: ['909', '914', '916', '912'],
     mco: ['914', '910', '916', '912'],
     record: ['914', '909', '911', '912'],
-    apollo: ['916', '909', '912', '913']   /* 月球任務沿用原圖的米白色外套，不換色 */
+    apollo: ['916', '909', '912', '913'],   /* 月球任務沿用原圖的米白色外套，不換色 */
+    kepler: ['914', '910', '913', '912']   /* Kepler 任務：綠色外套（c###_kepler.png，由原圖外套範圍換色） */
   };
   var FALLBACK_MK = ['ingenuity', 'opportunity', 'voyager', 'mco', 'record'];
   var FALLBACK_ID = ['914', '909', '911', '916', '910', '913', '912'];
@@ -105,11 +106,11 @@
         t += '<text x="280" y="86" font-size="62" text-anchor="middle">' + ic + '</text>';
         t += person(120, 300, 1.4, L, 'wave') + person(280, 312, 1.6, L2) + person(440, 300, 1.4, L3);
       } else if (kind === 'crew') {
-        var rs = (m && m.length ? m : [role]).slice(0, 6), n = rs.length, W = 560, step = W / n;
+        var rs = (m && m.length ? m : [role]).slice(0, 7), n = rs.length, W = 560, step = W / n;
         VB = '0 0 560 300';
         if (n >= 6) {   /* 六位：同一排，縮小 */
           VB = '0 0 560 330';
-          rs.forEach(function (r, i) { t += person(step * (i + .5), 330 + (i % 2) * 0, 0.9, roleLook(r, i + 1)); });
+          rs.forEach(function (r, i) { t += person(step * (i + .5), 330 + (i % 2) * 0, n >= 7 ? 0.8 : 0.9, roleLook(r, i + 1)); });
           t += '<text x="280" y="44" font-size="40" text-anchor="middle">🌟</text>';
         } else if (n >= 5) {   /* 五位：後排 3、前排 2 */
           VB = '0 0 560 400';

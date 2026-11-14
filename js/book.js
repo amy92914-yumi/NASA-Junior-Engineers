@@ -448,7 +448,7 @@
         d ? h('span', { class: 'done' }, ['✓ ' + d + '/4']) : null]));
     });
     return { l: page([h('div', { class: 'kicker' }, ['Contents']), h('h2', {}, [T('目錄：選一個故事', 'Contents: choose a story')]), list]),
-      r: page([sceneFig('crew', null, M.map(function (mm, i) { return rolesOf(mm)[[0, 1, 2, 3, 0, 1][i % 6]]; }), 'NASA 任務團隊（虛擬人物）', 'A NASA mission crew (illustrated)'), h('p', { class: 'note', style: 'font-size:.85em' }, [T('每個故事有 4 位 NASA 相關人物可以扮演；選好故事後，再選你的角色。', 'Every story has four NASA people you can play. Choose a story, then choose your role.'), ' ', h('a', { href: '#/about' }, [T('關於這個作品', 'About')])])], 'img'), bgm: 'home', marks: 'toc' };
+      r: page([sceneFig('crew', null, M.map(function (mm, i) { return rolesOf(mm)[[0, 1, 2, 3, 0, 1, 2][i % 7]]; }), 'NASA 任務團隊（虛擬人物）', 'A NASA mission crew (illustrated)'), h('p', { class: 'note', style: 'font-size:.85em' }, [T('每個故事有 4 位 NASA 相關人物可以扮演；選好故事後，再選你的角色。', 'Every story has four NASA people you can play. Choose a story, then choose your role.'), ' ', h('a', { href: '#/about' }, [T('關於這個作品', 'About')])])], 'img'), bgm: 'home', marks: 'toc' };
   }
   function rolesView(m) {
     var sel = store.role[m.id] || 0, rs = rolesOf(m);

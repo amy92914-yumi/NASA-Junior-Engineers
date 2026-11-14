@@ -117,5 +117,37 @@
       t(400, 420, '小錯誤在九個多月的航程裡不斷累積 · Small error, months of drift', { c: MUT, s: 16 }), '單位搞錯的示意圖 / Illustration: unit mix-up')
   };
 
+  /* 7. Kepler：凌日法——行星經過恆星前面，星光變暗一點點 */
+  ILLS.kep_transit = {
+    zh: '示意圖：行星從恆星前面經過，恆星的亮度會暫時變暗一點點（不按比例）', en: 'Illustration: when a planet passes in front of its star, the star’s brightness dips slightly (not to scale)',
+    svg: svg(
+      dots(40, 10, 10, 780, 190, 41, '#cdd8ff', 1.2) +
+      '<circle cx="400" cy="105" r="62" fill="#ffd166"/><circle cx="400" cy="105" r="62" fill="none" stroke="#ffe9a8" stroke-width="3" opacity=".6"/>' +
+      '<circle cx="190" cy="105" r="13" fill="#2a1a12" stroke="#8a6a50" stroke-width="2"/><circle cx="400" cy="105" r="13" fill="#2a1a12" stroke="#8a6a50" stroke-width="2"/><circle cx="610" cy="105" r="13" fill="#2a1a12" stroke="#8a6a50" stroke-width="2" opacity=".45"/>' +
+      '<path d="M170 105 L630 105" stroke="' + MUT + '" stroke-width="1.5" stroke-dasharray="3 7" fill="none"/>' +
+      tb(400, 36, '恆星', 'Star', { b: 1, s: 20 }) + tb(400, 188, '行星經過前面', 'The planet crosses in front', { c: AMB, s: 17 }) +
+      '<line x1="70" y1="360" x2="730" y2="360" stroke="' + LINE + '" stroke-width="2"/><line x1="70" y1="235" x2="70" y2="360" stroke="' + LINE + '" stroke-width="2"/>' +
+      '<path d="M70 262 L300 262 L330 318 L470 318 L500 262 L730 262" fill="none" stroke="' + CY + '" stroke-width="5" stroke-linejoin="round"/>' +
+      tb(76, 232, '亮度', 'Brightness', { a: 'start', c: MUT, s: 15 }) + tb(730, 384, '時間', 'Time', { a: 'end', c: MUT, s: 15 }) +
+      tb(400, 346, '亮度下降', 'Brightness dips', { c: CY, s: 15 }) +
+      tb(400, 420, '凹下去的地方，就是行星經過的訊號', 'The dip is the signal of a passing planet', { b: 1, zs: 20, es: 18 }), 'Kepler 凌日法示意圖 / Illustration: the transit method')
+  };
+
+  /* 8. Kepler：陽光的壓力——像獨木舟順著水流調整方向 */
+  ILLS.kep_sunlight = {
+    zh: '示意圖：陽光會輕輕推太空船；K2 讓這股推力幫忙維持指向（不按比例）', en: 'Illustration: sunlight gently pushes the spacecraft; K2 used that push to help hold its pointing (not to scale)',
+    svg: svg(
+      dots(40, 10, 10, 780, 430, 51, '#cdd8ff', 1.2) +
+      '<circle cx="70" cy="225" r="46" fill="#ffd166"/>' +
+      '<g stroke="#ffe9a8" stroke-width="3" opacity=".9" fill="none"><path d="M140 170 L330 170"/><path d="M140 225 L330 225"/><path d="M140 280 L330 280"/></g>' +
+      '<g fill="#ffe9a8"><path d="M330 170 l-14 -8 l0 16z"/><path d="M330 225 l-14 -8 l0 16z"/><path d="M330 280 l-14 -8 l0 16z"/></g>' +
+      '<g transform="translate(470 225)"><rect x="-28" y="-62" width="56" height="124" rx="8" fill="#8fa0d8"/><rect x="-14" y="-78" width="28" height="22" rx="4" fill="#d6dcf5"/><rect x="-44" y="10" width="16" height="44" fill="#4a78d6"/><rect x="28" y="10" width="16" height="44" fill="#4a78d6"/></g>' +
+      '<path d="M400 120 q70 -52 140 0" fill="none" stroke="' + GRN + '" stroke-width="4"/><path d="M540 120 l-14 -2 l8 -12z" fill="' + GRN + '"/>' +
+      tb(110, 120, '陽光', 'Sunlight', { b: 1, s: 20 }) + tb(470, 80, '調整指向', 'Adjusting its pointing', { c: GRN, s: 17 }) +
+      tb(400, 340, '陽光的壓力會把太空船推離原本的指向', 'Sunlight pressure pushes the spacecraft off its pointing', { b: 1, zs: 19, es: 17 }) +
+      tb(400, 376, '少了一顆反作用輪，這股推力就沒辦法被抵消', 'With a wheel lost, that push could no longer be countered', { zs: 17, es: 16, c: '#ffd3d3' }) +
+      tb(400, 412, 'K2：讓太空船像獨木舟一樣，順著這股「水流」保持方向', 'K2: steer like a kayak, using the push like a current', { zs: 17, es: 16, c: MUT }), 'Kepler 陽光壓力示意圖 / Illustration: sunlight pressure')
+  };
+
   window.ILLS = ILLS;
 })();

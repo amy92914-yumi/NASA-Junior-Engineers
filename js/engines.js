@@ -474,6 +474,92 @@
   };
 
 
+  /* ---------- 凌日：在星星的光變曲線上，點出「變暗」的地方（Kepler） ---------- */
+  E.transit = function (ch, ctx) {
+    var wrap = h('div', { class: 'transit qcard' });
+    var W = 560, H = 290, PL = 52, PR = 12, PT = 16, PB = 44, T0 = 30;   /* 時間軸 0～30 天（遊戲設定） */
+    var ri = 0, found = [], wrong = 0, finished = false, cur = 15;
+    var prog = h('div', { class: 'qprog' });
+    var title = h('div', { class: 'qtext' });
+    var chartBox = h('div', { class: 'tchart' });
+    var fb = h('div', { class: 'msg' });
+    var nextBtn = h('button', { class: 'btn small', style: 'display:none' }, [bi(mk('下一顆星 →', 'Next star →'), 'inline')]);
+    var hintBtn = h('button', { class: 'btn small ghost' }, [bi(S.hint, 'inline')]);
+    function rng(seed) { var s = seed * 7919 + 13; return function () { s = (s * 9301 + 49297) % 233280; return s / 233280; }; }
+    function curve(r) {
+      var R = rng(r.seed), pts = [], i, t, f;
+      for (i = 0; i < r.n; i++) {
+        t = i / (r.n - 1) * T0; f = 1;
+        r.dips.forEach(function (d) { var x = Math.abs(t - d.at), half = d.w / 2; if (x <= half * 0.6) f -= d.depth; else if (x <= half) f -= d.depth * (half - x) / (half * 0.4); });
+        f += (R() - 0.5) * 2 * r.noise; pts.push([t, f]);
+      }
+      return pts;
+    }
+    function X(t) { return PL + t / T0 * (W - PL - PR); }
+    function tOf(x) { return (x - PL) / (W - PL - PR) * T0; }
+    function tt(x, y, zh, en, o) {
+      o = o || {};
+      return '<text x="' + x + '" y="' + y + '" fill="' + (o.c || '#a9b4d6') + '" text-anchor="' + (o.a || 'middle') + '" font-size="' + (o.s || 14) + '"' + (o.rot ? ' transform="rotate(-90 ' + x + ' ' + y + ')"' : '') + '><tspan class="zh">' + zh + '</tspan><tspan class="en" font-family="Arial, Helvetica, sans-serif">' + en + '</tspan></text>';
+    }
+    function draw() {
+      var r = ch.rounds[ri], pts = curve(r), Y = function (f) { return PT + (r.ymax - f) / (r.ymax - r.ymin) * (H - PT - PB); };
+      var d = '', i; for (i = 0; i < pts.length; i++) d += (i ? 'L' : 'M') + X(pts[i][0]).toFixed(1) + ' ' + Y(pts[i][1]).toFixed(1);
+      var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="light curve" tabindex="0" xmlns="http://www.w3.org/2000/svg">' +
+        '<rect width="' + W + '" height="' + H + '" rx="12" fill="#0f1a36"/>';
+      var k; for (k = 0; k <= 5; k++) svg += '<line x1="' + X(k * 6) + '" y1="' + PT + '" x2="' + X(k * 6) + '" y2="' + (H - PB) + '" stroke="#1f2c52" stroke-width="1"/>' + '<text x="' + X(k * 6) + '" y="' + (H - PB + 16) + '" fill="#a9b4d6" text-anchor="middle" font-size="12">' + (k * 6) + '</text>';
+      svg += '<line x1="' + PL + '" y1="' + Y(1) + '" x2="' + (W - PR) + '" y2="' + Y(1) + '" stroke="#2c3a66" stroke-width="1.5" stroke-dasharray="5 6"/>';
+      r.dips.forEach(function (dp, j) { if (found[j]) svg += '<rect x="' + X(dp.at - dp.w * 0.75) + '" y="' + PT + '" width="' + (X(dp.at + dp.w * 0.75) - X(dp.at - dp.w * 0.75)) + '" height="' + (H - PT - PB) + '" fill="#4ade80" opacity=".18"/><text x="' + X(dp.at) + '" y="' + (PT + 14) + '" fill="#4ade80" text-anchor="middle" font-size="13" font-weight="700">\u2713</text>'; });
+      svg += '<path d="' + d + '" fill="none" stroke="#5fd0ff" stroke-width="2.4" stroke-linejoin="round"/>';
+      svg += '<line id="tcur" x1="' + X(cur) + '" y1="' + PT + '" x2="' + X(cur) + '" y2="' + (H - PB) + '" stroke="#ffb454" stroke-width="1.5" stroke-dasharray="3 4" opacity="0"/>';
+      svg += tt(PL + (W - PL - PR) / 2, H - 8, '時間（天）', 'Time (days)') + tt(14, PT + (H - PT - PB) / 2, '亮度', 'Brightness', { rot: 1 });
+      svg += '</svg>';
+      chartBox.innerHTML = svg;
+      var el = chartBox.firstChild;
+      el.addEventListener('click', function (e) { var b = el.getBoundingClientRect(); choose(tOf((e.clientX - b.left) / b.width * W)); });
+      el.addEventListener('mousemove', function (e) { var b = el.getBoundingClientRect(), x = (e.clientX - b.left) / b.width * W, c = el.querySelector('#tcur'); if (c) { c.setAttribute('x1', x); c.setAttribute('x2', x); c.setAttribute('opacity', '.7'); } });
+      el.addEventListener('mouseleave', function () { var c = el.querySelector('#tcur'); if (c) c.setAttribute('opacity', '0'); });
+      el.addEventListener('keydown', function (e) {
+        var c = el.querySelector('#tcur');
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); cur = Math.max(0, Math.min(T0, cur + (e.key === 'ArrowRight' ? 0.5 : -0.5))); if (c) { c.setAttribute('x1', X(cur)); c.setAttribute('x2', X(cur)); c.setAttribute('opacity', '.9'); } }
+        else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(cur); }
+      });
+    }
+    function head() {
+      var r = ch.rounds[ri];
+      prog.innerHTML = ''; prog.appendChild(bi(mk('第 ' + (ri + 1) + ' / ' + ch.rounds.length + ' 顆星', 'Star ' + (ri + 1) + ' of ' + ch.rounds.length), 'inline'));
+      title.innerHTML = ''; title.appendChild(bi(r.label)); title.appendChild(h('div', { class: 'note' }, [bi(r.prompt)]));
+      msg(fb, ''); nextBtn.style.display = 'none'; hintBtn.style.display = ''; found = []; wrong = 0; draw();
+    }
+    function choose(t) {
+      if (finished) return;
+      var r = ch.rounds[ri], j, hit = -1;
+      for (j = 0; j < r.dips.length; j++) if (!found[j] && Math.abs(t - r.dips[j].at) <= Math.max(1.6, r.dips[j].w * 0.75)) { hit = j; break; }
+      if (hit >= 0) {
+        found[hit] = true; draw();
+        var n = found.filter(Boolean).length;
+        if (n >= r.need) {
+          var c = h('div'); c.appendChild(h('b', {}, ['\u2713 '])); c.appendChild(bi(r.explain)); msg(fb, 'ok', c);
+          hintBtn.style.display = 'none';
+          if (ri === ch.rounds.length - 1) { finished = true; ctx.solved(); } else nextBtn.style.display = '';
+        } else {
+          msg(fb, 'ok', h('div', {}, [h('b', {}, ['\u2713 ']), bi(mk('找到一個了！還有 ' + (r.need - n) + ' 個。', 'Found one! ' + (r.need - n) + ' more to go.'))]));
+        }
+      } else {
+        wrong++;
+        var c2 = h('div'); c2.appendChild(h('b', {}, ['\u2717 '])); c2.appendChild(bi(mk('那裡的亮度很穩定，只是小小的抖動。再找找星光暗下去的地方。', 'The brightness is steady there, just small wiggles. Look for where the starlight dims.')));
+        if (wrong >= 2) { c2.appendChild(h('div', { class: 'note' }, [bi(r.hint)])); }
+        msg(fb, 'bad', c2);
+      }
+    }
+    hintBtn.addEventListener('click', function () { var r = ch.rounds[ri]; msg(fb, '', bi(r.hint)); });
+    nextBtn.addEventListener('click', function () { ri++; head(); });
+    wrap.appendChild(prog); wrap.appendChild(title); wrap.appendChild(chartBox);
+    wrap.appendChild(h('div', { class: 'note', style: 'font-size:.85em' }, [bi(mk('點圖上的位置作答；也可以用 ← → 移動、Enter 選取。', 'Click the chart to answer; or use \u2190 \u2192 to move and Enter to select.'))]));
+    wrap.appendChild(fb); wrap.appendChild(hintBtn); wrap.appendChild(nextBtn);
+    head();
+    return wrap;
+  };
+
   window.ENGINES = E;
   window.U = { h: h, bi: bi };
 })();

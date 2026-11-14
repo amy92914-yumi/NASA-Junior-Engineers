@@ -224,3 +224,8 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 
 /* 示意圖（SVG）內的雙語文字：依語言只顯示一種 */
 .lang-zh svg .en,.lang-en svg .zh{display:none}
+
+/* ===== Kepler：凌日關卡的光變曲線 ===== */
+.transit .tchart svg{display:block;width:100%;height:auto;border-radius:12px;cursor:crosshair;outline-offset:3px}
+.transit .tchart svg:focus-visible{outline:2px solid #ffb454}
+.lang-zh .transit svg .en,.lang-en .transit svg .zh{display:none}

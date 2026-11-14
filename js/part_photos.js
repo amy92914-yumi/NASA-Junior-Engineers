@@ -25,6 +25,7 @@
     voyager: [{ id: 'PIA25782' }, { id: 'PIA21480' }, { id: 'PIA22915' }, { id: 'PIA22915' }, { id: 'PIA14113' }],
     mco: [{ id: 'PIA02330', rel: 1 }, { id: 'KSC-digitalmco', rel: 1 }, { id: 'KSC-98pc1733', rel: 1 }, { id: 'PIA23214', rel: 1 }, { id: 'KSC-98pc1079', rel: 1 }],
     apollo: [{ id: 'AS11-40-5927' }, { id: 'apollo-lm-diagram' }, { id: 'AS11-44-6574', rel: 1 }, { id: 'AS11-40-5949' }, { id: 'AS17-147-22526' }, { id: 'lrv-display' }],
-    record: [{ id: 'PIA14113' }, { id: 'PIA21741', rel: 1 }, { id: 'PIA17035', rel: 1 }, { id: '201309120010HQ', rel: 1 }, { id: 'voyager-record-diagram' }, { id: 'PIA21738', rel: 1 }]
+    record: [{ id: 'PIA14113' }, { id: 'PIA21741', rel: 1 }, { id: 'PIA17035', rel: 1 }, { id: '201309120010HQ', rel: 1 }, { id: 'voyager-record-diagram' }, { id: 'PIA21738', rel: 1 }],
+    kepler: [{ id: 'ARC-2006-ACD06-0131-013', rel: 1 }, { id: 'ARC-2008-ACD07-0203-195', rel: 1 }, null, null, null, null]   /* 只放真實照片；其餘零件沒有合適的照片，網站顯示示意圖 */
   };
 })();
